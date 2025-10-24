@@ -5,17 +5,18 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // your frontend origin
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true, // if you're using cookies or authentication headers
+    credentials: true,
   }),
 );
 
 app.get("/summary", async (req, res) => {
+  console.log("summary called");
   try {
     const [ordersRes, inventoryRes] = await Promise.all([
-      axios.get("http://localhost:5001/orders"),
-      axios.get("http://localhost:5002/inventory"),
+      axios.get("http://order-service.default:5002/orders"),
+      axios.get("http://inventory-service.default:5001/inventory"),
     ]);
 
     const summary = ordersRes.data.map((order) => {
@@ -31,13 +32,14 @@ app.get("/summary", async (req, res) => {
     });
 
     res.json(summary);
+    // res.json(summary);
   } catch (error) {
     console.error("Error fetching data:", error);
     res.status(500).json({ error: "Failed to fetch data" });
   }
 });
 
-const PORT = 5003;
+const PORT = 3000;
 
 app.listen(PORT, () => {
   console.log(`Gateway Service running on http://localhost:${PORT}`);

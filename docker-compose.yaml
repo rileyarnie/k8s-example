@@ -1,0 +1,37 @@
+services:
+  frontend:
+    build:
+      context: ./react-frontend
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    ports:
+      - 80:80
+  gateway:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    ports:
+      - 3000:3000
+  inventory:
+    build:
+      context: ./inventory-service
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    ports:
+      - 5001:5001
+  order:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    ports:
+      - 5002:5002

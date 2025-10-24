@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = 5002;
+const PORT = 5001;
 
 const inventory = [
   { id: 101, name: "Laptop", stock: 10 },

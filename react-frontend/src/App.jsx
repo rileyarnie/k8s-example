@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const App = () => {
   const [summary, setSummary] = useState([]);
@@ -8,10 +8,11 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5003/summary');
+        const response = await axios.get("http://127.0.0.1:64619/summary");
+        console.log(response);
         setSummary(response.data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <div>
       <h1>Order Summary</h1>
+      <p>New Change!!! URL!!!</p>
       <table>
         <thead>
           <tr>
@@ -35,7 +37,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {summary.map(item => (
+          {summary.map((item) => (
             <tr key={item.orderId}>
               <td>{item.orderId}</td>
               <td>{item.productName}</td>
